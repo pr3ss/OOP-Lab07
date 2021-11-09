@@ -1,6 +1,7 @@
 package it.unibo.oop.lab.anonymous1;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import it.unibo.oop.lab.socialnetwork.SocialNetworkUser;
@@ -78,6 +79,21 @@ public final class TestAnonymousComparator {
         /*
          * expected Result
          */
+        denzelUsers.sort(new Comparator<>(){
+
+			@Override
+			public int compare(User o1, User o2) {
+				if(o1.getAge() == o2.getAge()) {
+					return 0;   
+				}
+				else if(o1.getAge() > o2.getAge()) {
+					return 1;
+				}
+				return -1;
+			}
+        	
+        });
+        
         List<User> expectedResult = new ArrayList<>();
         expectedResult.add(pverdi);
         expectedResult.add(mrossi);
@@ -109,6 +125,20 @@ public final class TestAnonymousComparator {
         /*
          * expected Result
          */
+        rossiUsers.sort(new Comparator<>() {
+
+			@Override
+			public int compare(User o1, User o2) {
+				if(o1.getAge() == o2.getAge()) {
+					return 0;   
+				}
+				else if(o1.getAge() < o2.getAge()) {
+					return 1;
+				}
+				return -1;
+		
+			}
+		});
         expectedResult = new ArrayList<>();
         expectedResult.add(dwashington);
         expectedResult.add(kbacon);
