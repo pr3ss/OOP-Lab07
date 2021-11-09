@@ -34,26 +34,16 @@ public class OneListAcceptable<T> implements Acceptable<T> {
              */
             @Override
             public void accept(final T newElement) throws Acceptor.ElementNotAcceptedException {
-                try {
-                    if (newElement.equals(iterator.next())) {
-                        return;
-                    }
-                } catch (Exception e) {
-                    System.out.println("no more element to be evaluated");
+                if (!iterator.hasNext() || !newElement.equals(iterator.next())) {
+                    throw new Acceptor.ElementNotAcceptedException(newElement);
                 }
-                throw new Acceptor.ElementNotAcceptedException(newElement);
             }
 
             @Override
             public void end() throws Acceptor.EndNotAcceptedException {
-                try {
-                    if (!iterator.hasNext()) {
-                        return;
-                    }
-                } catch (Exception e) {
-                    System.out.println("2" + e.getMessage());
+                if (iterator.hasNext()) {
+                    throw new Acceptor.EndNotAcceptedException();
                 }
-                throw new Acceptor.EndNotAcceptedException();
             }
         };
     }
